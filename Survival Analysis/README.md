@@ -10,7 +10,9 @@ The following dependencies are required in order to complete the survival analys
 ```
 python >= 3.5
 jupyter notebook
-scikit-learn
+numpy >= 1.12
+pandas >= scikit-learn
+scipy >= 1.0
 scikit-survival
 ```
 
