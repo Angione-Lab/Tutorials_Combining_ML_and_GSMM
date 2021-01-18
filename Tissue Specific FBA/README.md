@@ -38,8 +38,9 @@ http://brackets.io/
 ## Running the code
 
 The folder Tissue Specific FBA contains a set of demo prerequisite .mat variables and a RUN.m script that can be run in MATLAB. 
-The gene expression dataset integrated in this tutorial is the TCGA breast cancer dataset.
-To perform the analysis, simply open RUN.m in MATLAB and run.
+The gene expression dataset integrated in this tutorial is the TCGA breast cancer dataset:
+https://www.cancer.gov/about-nci/organization/ccg/research/structural-genomics/tcga
+To perform the analysis, simply open RUN.m in MATLAB and run the script.
 All variables and datasets can be substituted and the script can be adapted according to the users' requirements.
 
 ## License
