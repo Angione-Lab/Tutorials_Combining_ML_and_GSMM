@@ -5,7 +5,7 @@ If you use this code, please cite the associated Springer Chapter:
 
 ## Prerequisites
 
-It is required to install the following dependencies in order to be able to run the files:
+The following dependencies are required in order to complete the flux balance analysis:
 
 ### MATLAB 
 https://uk.mathworks.com/downloads/
