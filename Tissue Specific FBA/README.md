@@ -37,12 +37,22 @@ http://brackets.io/
 
 ## Running the code
 
-The folder Tissue Specific FBA contains a set of demo prerequisite .mat variables and a RUN.m script that can be run in MATLAB. 
+The folder Tissue Specific FBA contains a set of demo .mat variables, a .csv input dataset and .m scripts that can be run in MATLAB. 
+
+These files include:
+`fbamodel.mat` - a genome-scale metabolic model (GSMM) of human breast cancer 
+`evaluate_objective.m` - a function called by the script `RUN.m` that performs regularized optimization during FBA by minimizing norm-2 
+`gene_expression.csv` - gene expression values for breast cancer
+`genes.mat` - a list of genes within the breast cancer model
+`ixs_genes_sorted_by_length.mat` - an array indexing all genes by their length (required when replacing genes with their expression values)
+`pos_genes_in_react_expr.mat` - an array indexing the position of all genes within all reactions in the model
+`reaction_expression.mat` - an array defining the connection between genes and reactions
+`RUN.m` - the executeable script for running tissue-specific FBA
 
 The gene expression dataset integrated in this tutorial is the TCGA breast cancer dataset:
 https://www.cancer.gov/about-nci/organization/ccg/research/structural-genomics/tcga.
 
-To perform the analysis, simply open RUN.m in MATLAB and run the script.
+To perform the analysis, simply open `RUN.m` in MATLAB and run the script.
 
 All variables and datasets can be substituted and the script can be adapted according to the users' requirements.
 
