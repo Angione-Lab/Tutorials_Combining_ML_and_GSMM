@@ -10,8 +10,13 @@ The following dependencies are required in order to complete the survival analys
 ```
 python >= 3.5
 jupyter notebook
+ecos
+joblib
+numexpr
 numpy >= 1.12
-pandas >= scikit-learn
+osqp
+pandas >= 0.25
+scikit-learn >= 0.22
 scipy >= 1.0
 scikit-survival
 ```
