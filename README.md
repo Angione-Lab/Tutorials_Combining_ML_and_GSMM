@@ -1,5 +1,6 @@
 # Tutorials_Combining_ML_and_GSMM
-  The presented code is the one published in TBD.
+If you use this code, please cite the associated Springer Chapter:
+"Supreeta Vijayakumar, Giuseppe Magazzù, Pradip Moon, Annalisa Occhipinti and Claudio Angione - A Practical Guide to Integrating Multimodal Machine Learning and Metabolic Modeling".
 
 ### Prerequisites
 
