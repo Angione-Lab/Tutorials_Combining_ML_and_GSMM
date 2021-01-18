@@ -39,8 +39,3 @@ This is free software for academic use that can be redistributed and/or modified
 This code is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Public License for more details.
 
 Supreeta Vijayakumar - January 2021
-
-
-`fluxes.csv`
-
-`survival_data.csv`
