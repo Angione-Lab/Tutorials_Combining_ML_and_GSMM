@@ -28,9 +28,6 @@ These files include:
 
 `Survival Analysis.ipynb` - An IPython notebook that can be used to run survival analysis from Jupyter Notebook
 
-The survival dataset integrated in this tutorial is the TCGA breast cancer dataset:
-https://www.cancer.gov/about-nci/organization/ccg/research/structural-genomics/tcga.
-
 To perform the analysis, simply open `Survival Analysis.ipynb` in jupyter notebook and execute the cells from top to bottom OR run `Survival Analysis.py` from any Python platform.
 
 All variables and datasets can be substituted and the script can be adapted according to the users' requirements.
