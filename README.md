@@ -16,7 +16,8 @@ matplotlib >= 2.1.2
 keras
 ```
 ### Running the code
-The two folders contain two different tutorials that can be run independently. Two toy datasets for each tutorial are provided.
+The two folders for the regression and classification tasks contain two different tutorials that can be run independently. Two toy datasets for each tutorial are provided.
+To run the code, simply open it in jupyter notebook and excute the cells from top to bottom.
 ### License
 This is free software for academic use: you can redistribute it and/or modify it under the terms of the GNU Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
