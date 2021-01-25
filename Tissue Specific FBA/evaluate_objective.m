@@ -1,4 +1,4 @@
-function [v_out, f_out] = evaluate_objective(x, M, V, fbamodel, genes, reaction_expression, pos_genes_in_react_expr, ixs_genes_sorted_by_length, gamma, gamma_index)
+function [v_out, f_out, gammaLB, gammaUB, gamma] = evaluate_objective(x, M, V, fbamodel, genes, reaction_expression, pos_genes_in_react_expr, ixs_genes_sorted_by_length, gamma, gamma_index)
 warning off
 yt=x';      % x' is the transpose of x, that is the gene expression array
 
@@ -6,7 +6,7 @@ yt=x';      % x' is the transpose of x, that is the gene expression array
 %reaction_expression( cellfun(@isempty, reaction_expression) ) = {'1'};  %replaces all the empty cells of gene expression (e.g. exchange reactions) with '1', i.e. gene expressed nomally
 
 %reaction_expression = cellfun(@(c) c{1},reaction_expression);
-%geni = cellfun(@(c) c{1},geni);
+%genes = cellfun(@(c) c{1},geni);
 
 eval_reaction_expression = reaction_expression;
 
