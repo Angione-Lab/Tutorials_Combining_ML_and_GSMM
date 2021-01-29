@@ -1,16 +1,8 @@
-function [v_out, f_out, gammaLB, gammaUB, gamma] = evaluate_objective(x, M, V, fbamodel, genes, reaction_expression, pos_genes_in_react_expr, ixs_genes_sorted_by_length, gamma, gamma_index)
+function [v_out, f_out] = evaluate_objective(x, fbamodel, genes, reaction_expression, pos_genes_in_react_expr, ixs_genes_sorted_by_length, gamma)
 warning off
 yt=x';      % x' is the transpose of x, that is the gene expression array
 
-%genes( cellfun(@isempty, reaction_expression) ) = {'1'};  %replaces all the empty names of genes with the name '1'
-%reaction_expression( cellfun(@isempty, reaction_expression) ) = {'1'};  %replaces all the empty cells of gene expression (e.g. exchange reactions) with '1', i.e. gene expressed nomally
-
-%reaction_expression = cellfun(@(c) c{1},reaction_expression);
-%genes = cellfun(@(c) c{1},geni);
-
 eval_reaction_expression = reaction_expression;
-
-
 
 %indices are sorted by length of their string, so the longest get replaced first. This avoids, for example, that if we have two genes 123.1 and 23.1, the substring '23.1' is replaced in both. If we first replace the longest and finally the shortest, this problem is avoided
 
@@ -22,14 +14,11 @@ for i=ixs_genes_sorted_by_length %loop over the array of the non-1 gene expressi
 end
 eval_reaction_expression( cellfun(@isempty, eval_reaction_expression) ) = {'1.0'};  %replaces all the empty cells of gene expression (e.g. exchange reactions) with 1, i.e. gene expressed nomally
 
-
-
 % for i=1:numel(eval_reaction_expression)
 %     for j=1:numel(genes) %in the eval_reaction_expression in which already all the non-1 genes have been substituted with their values, we now have to substitute all the remaining genes with the number 1
 %         eval_reaction_expression{i} = strrep(eval_reaction_expression{i}, ['/' geni{j} '/'], '1.0');  %we do this job only for the non-1 reaction expressions, so we save a lot of computational time. Note that we need '1.0' because the regecpr below is looking for NUM.NUM strings, and therefore putting only '1' will give an infinite loop
 %     end
 % end
-
 
 %eval_reaction_expression( cellfun(@isempty, eval_reaction_expression) ) = {'1'};  %replaces all the empty cells of gene expression (e.g. exchange reactions or reactions whose genes have all gene expression 1) with 1, i.e. gene expressed nomally
 
@@ -56,112 +45,30 @@ for i=1:length(num_reaction_expression)
     
     str = regexprep(str,'/','');
     
-%     try
+     try
         num_reaction_expression(i) = eval(str);   %evaluates the cells like they are numerical expressions (so as to compute min and max of gene expressions)
-%     catch
-%         i
-%         warning('Problem using function.  Assigning a value of 1.');
-%         num_reaction_expression(i) = 1;
-%     end
+     catch
+        warning('Problem using function.  Assigning a value of 1.');
+        num_reaction_expression(i) = 1;
+     end
 end
-
-%gamma = ones(1,length(reaction_expression));
-
-% 
-% for i=1:length(num_reaction_expression)   %loop over the array of the geneset expressions
-%     if num_reaction_expression(i)>=1
-%         fbarecon.lb(i) = fbarecon.lb(i)*(1+gamma(i)*log(num_reaction_expression(i)));
-%         fbarecon.ub(i) = fbarecon.ub(i)*(1+gamma(i)*log(num_reaction_expression(i)));
-%     else
-%         fbarecon.lb(i) = fbarecon.lb(i)/(1+gamma(i)*abs(log(num_reaction_expression(i))));
-%         fbarecon.ub(i) = fbarecon.ub(i)/(1+gamma(i)*abs(log(num_reaction_expression(i))));
-%     end
-% end
-% save('num_reaction_expression.mat');
-% save('fbarecon.mat');
-
-%solution before changing Bounds
-% disp('Sol before changing bounds');
-% sol_fba_minNorm = optimizeCbModel(fbarecon, 'max', 1e-6); %minNorm = 1e-6, minimizes overall sum of squared fluxes
-% v1_minNorm = sol_fba_minNorm.v;
-% f_out_minNorm(1) = fbarecon.c' * v1_minNorm
 
 for i=1:length(num_reaction_expression)   %loop over the array of the geneset expressions
-         if i == gamma_index
-%              disp('Before changing LB and UB');
-%              fprintf('lower bound: %f ', fbarecon.lb(i));
-%              fprintf('upper bound: %f ', fbarecon.ub(i));
-%              fprintf('gamma: %d \n', gamma(i));
-%              fprintf('num_reaction_expression(i) %f \n',num_reaction_expression(i));
-             
-             
-             %if num_reaction_expression(i)^gamma(i)==Inf we leave UB and LB unchanged
-%              if(num_reaction_expression(i)^gamma(i)~=Inf)
-%                  fbarecon.ub(i) = fbarecon.ub(i)*(num_reaction_expression(i));%^gamma(i));
-%                  fbarecon.lb(i) = fbarecon.lb(i)*(num_reaction_expression(i));%^gamma(i));
-%              end
-
-%             %fprintf('gamma index: %d gamma(gamma_index): %d\n', gamma_index, gamma(gamma_index));
-             fbamodel.lb(i)=fbamodel.lb(i)*gamma(i);
-             fbamodel.ub(i)=fbamodel.ub(i)*gamma(i);
-             gammaLB = fbamodel.lb(i);
-             gammaUB = fbamodel.ub(i);
-         end  
-%             %manually change Biomass_NCI UB and LB
-if(i == gamma_index)
-             fprintf('lower bound: %f ', fbamodel.lb(i));
-             fprintf('upper bound: %f ', fbamodel.ub(i));
-             fprintf('gamma: %d \n', gamma(i));
-end
-             %fprintf('num_reaction_expression(i) %f\n',num_reaction_expression(i));
-%             %fprintf('num_reaction_expression(i): %d', num_reaction_expression(i));
-%             %fprintf('num_reaction_expression(i)^gamma(i) %f, ', num_reaction_expression(i)^gamma(i))
-
-%         else
-%            % fbarecon.lb(i) = fbarecon.lb(i)*gamma(i);%0.0233;%
-%            % fbarecon.ub(i) = fbarecon.ub(i)*gamma(i);%0.0171;%
-      %   end
+    if num_reaction_expression(i)>=1
+        fbamodel.lb(i) = fbamodel.lb(i)*(1+gamma*log(num_reaction_expression(i)));
+        fbamodel.ub(i) = fbamodel.ub(i)*(1+gamma*log(num_reaction_expression(i)));
+    else
+        fbamodel.lb(i) = fbamodel.lb(i)/(1+gamma*abs(log(num_reaction_expression(i))));
+        fbamodel.ub(i) = fbamodel.ub(i)/(1+gamma*abs(log(num_reaction_expression(i))));        
+    end
 end
 
-%[v1, fmax, fmax_max] = flux_balance_trilevel(fbarecon,true);
-%[v, vmax, vmin, fmax, fmin] = flux_balance(fbarecon,true);
-
-%fbarecon = RenameField(fbarecon,'f','c');
-%Added at the top of Main script
-%changeCobraSolver('pdco','QP'); %qpng fails at solving the quadratic minimisation of the overall flux rates
+if isfield(fbamodel, 'f')
+    fbamodel.c = fbamodel.f;
+end
 sol_fba_minNorm = optimizeCbModel(fbamodel, 'max', 1e-6); %minNorm = 1e-6, minimizes overall sum of squared fluxes
 v_out = sol_fba_minNorm.v;
-
-% objective functions number M is 1
-if size(v_out,1) == 0
-    f_out(1) = 0;
-    disp('optimal value is zero!');
-    %do not update this gamma index as this will "block the model"
-    %put lb and ub back as their original values
-    fbamodel.lb(gamma_index)=fbamodel.lb(gamma_index)/gamma(gamma_index);
-    fbamodel.ub(gamma_index)=fbamodel.ub(gamma_index)/gamma(gamma_index);
-    gammaLB = fbamodel.lb(gamma_index);
-    gammaUB = fbamodel.ub(gamma_index);
-    fprintf('lower bound: %f ', fbamodel.lb(gamma_index));
-    fprintf('upper bound: %f \n', fbamodel.ub(gamma_index));
-    sol_fba_minNorm = optimizeCbModel(fbamodel, 'max', 1e-6); %minNorm = 1e-6, minimizes overall sum of squared fluxes
-    v_out = sol_fba_minNorm.v;
-    f_out(1) = 0; fbamodel.c' * v_out; % Biomass
-else
-    f_out(1) = fbamodel.c' * v_out; % Biomass
-end
-
-
-%f_out(2) = fmax; % max of the 2nd objective
-
-fbarecon_new = fbamodel;
-
 format longG; format compact;
+f_out = sol_fba_minNorm.f;
 f_out
-
-% if gamma_index == 57
-%     disp('here')
-%     error('stop');
-% end
-
 end
