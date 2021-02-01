@@ -38,11 +38,3 @@ These files include:
 To perform the analysis, simply open `Survival Analysis.ipynb` in Jupyter Notebook and execute the cells from top to bottom OR run `Survival Analysis.py` from any Python platform.
 
 All variables and datasets can be substituted and the script can be adapted according to the users' requirements.
-
-## License
-
-This is free software for academic use that can be redistributed and/or modified under the terms of the GNU Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
-
-This code is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Public License for more details.
-
-Supreeta Vijayakumar - January 2021
