@@ -13,5 +13,5 @@ keras
 ```
 ### Running the code
 The two folders for the regression and classification tasks contain two different tutorials that can be run independently. 
-The data sets gene_expression.csv and fluxes.csv are provided in the folder.
+The data sets `gene_expression.csv` and `fluxes.csv` are provided in the folder.
 To run the code, simply open it in jupyter notebook and execute the cells from top to bottom.
