@@ -2,7 +2,7 @@
 If you use this code, please cite the associated Springer Chapter:
 "Supreeta Vijayakumar, Giuseppe Magazzù, Pradip Moon, Annalisa Occhipinti and Claudio Angione - A Practical Guide to Integrating Multimodal Machine Learning and Metabolic Modeling".
 
-# Running the code
+## Running the code
 
 Each of the four subfolders within the repository contains scripts, variables and datasets associated with one of four tutorials described in the publication "A Practical Guide to Integrating Multimodal Machine Learning and Metabolic Modeling".  
 
@@ -12,7 +12,7 @@ In summary, gene expression data is used as input for a human genome-scale model
 
 Note that the tutorial for Tissue Specific FBA must be run before the Survival Analysis, Classification Task with Early Data Integration or Regression Task with Late Data Integration since `fluxes.csv` is a prerequisite for applying survival or machine learning analysis. The latter three tutorials can be run in any order.
 
-### License
+## License
 
 This is free software for academic use that can be redistributed and/or modified under the terms of the GNU Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
 
