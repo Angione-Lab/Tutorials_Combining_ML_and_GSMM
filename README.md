@@ -2,6 +2,8 @@
 If you use this code, please cite the associated Springer Chapter:
 "Supreeta Vijayakumar, Giuseppe Magazzù, Pradip Moon, Annalisa Occhipinti and Claudio Angione - A Practical Guide to Integrating Multimodal Machine Learning and Metabolic Modeling".
 
+Link: https://pubmed.ncbi.nlm.nih.gov/35604554/
+
 ## Running the code
 
 Each of the four subfolders within the repository contains scripts, variables and datasets associated with one of four tutorials described in the publication "A Practical Guide to Integrating Multimodal Machine Learning and Metabolic Modeling".  
@@ -18,4 +20,4 @@ This is free software for academic use that can be redistributed and/or modified
 
 This code is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Public License for more details.
 
-The Authors - January 2021
+The Authors - May 2022
